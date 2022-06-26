@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
 using Service.Contracts;
 using Service.Contracts.Interfaces;
 using Service.Services;
@@ -18,13 +19,13 @@ namespace Service
         private readonly Lazy<IGenreService> _genreService;
         private readonly Lazy<IPhotoService> _photoService;
 
-        public ServiceManager(IRepositoryManager repositoryManager,ILoggerManager loggerManager)
+        public ServiceManager(IRepositoryManager repositoryManager,ILoggerManager loggerManager,IMapper mapper)
         {
-            _movieService = new Lazy<IMovieService>(() => new MovieService(repositoryManager, loggerManager));
-            _actorService = new Lazy<IActorService>(() => new ActorService(repositoryManager, loggerManager));
-            _directorService = new Lazy<IDirectorService>(() => new DirectorService(repositoryManager, loggerManager));
-            _genreService = new Lazy<IGenreService>(() => new GenreService(repositoryManager, loggerManager));
-            _photoService = new Lazy<IPhotoService>(() => new PhotoService(repositoryManager, loggerManager)); 
+            _movieService = new Lazy<IMovieService>(() => new MovieService(repositoryManager, loggerManager,mapper));
+            _actorService = new Lazy<IActorService>(() => new ActorService(repositoryManager, loggerManager,mapper));
+            _directorService = new Lazy<IDirectorService>(() => new DirectorService(repositoryManager, loggerManager,mapper));
+            _genreService = new Lazy<IGenreService>(() => new GenreService(repositoryManager, loggerManager,mapper));
+            _photoService = new Lazy<IPhotoService>(() => new PhotoService(repositoryManager, loggerManager,mapper)); 
         }
 
 
